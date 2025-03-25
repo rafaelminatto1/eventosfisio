@@ -1,58 +1,79 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { User } from '../models/types';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'admin' | 'user';
+}
 
 interface AuthContextType {
   user: User | null;
-  loading: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
-  logout: () => void;
   isAuthenticated: boolean;
+  isLoading: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Verificar se existe um usuário armazenado no localStorage ao iniciar
+    // Simulando verificação de token salvo
     const storedUser = localStorage.getItem('user');
+    
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (error) {
+        console.error('Erro ao carregar usuário do localStorage:', error);
+        localStorage.removeItem('user');
+      }
     }
-    setLoading(false);
+    
+    setIsLoading(false);
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
-    try {
-      setLoading(true);
+  const login = async (email: string, password: string) => {
+    // Simulando um login (em produção, isto seria uma chamada API)
+    setIsLoading(true);
+    
+    // Simular delay de rede
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Mock de validação de usuário
+    if (email === 'admin@example.com' && password === 'password') {
+      const mockUser: User = {
+        id: '1',
+        name: 'Administrador',
+        email: 'admin@example.com',
+        role: 'admin'
+      };
       
-      // Simulação de login - isso seria substituído por uma chamada à API real
-      // Este é um exemplo temporário apenas para demonstração
-      if (email === 'admin@exemplo.com' && password === 'senha123') {
-        const userData: User = {
-          id: '1',
-          name: 'Administrador',
-          email: 'admin@exemplo.com',
-          role: 'admin',
-          phone: '(11) 99999-9999',
-          createdAt: new Date(),
-          updatedAt: new Date()
-        };
-        
-        setUser(userData);
-        localStorage.setItem('user', JSON.stringify(userData));
-        return true;
-      }
+      setUser(mockUser);
+      localStorage.setItem('user', JSON.stringify(mockUser));
+    } else if (email === 'user@example.com' && password === 'password') {
+      const mockUser: User = {
+        id: '2',
+        name: 'Usuário',
+        email: 'user@example.com',
+        role: 'user'
+      };
       
-      return false;
-    } catch (error) {
-      console.error('Erro ao fazer login:', error);
-      return false;
-    } finally {
-      setLoading(false);
+      setUser(mockUser);
+      localStorage.setItem('user', JSON.stringify(mockUser));
+    } else {
+      throw new Error('Credenciais inválidas');
     }
+    
+    setIsLoading(false);
   };
 
   const logout = () => {
@@ -61,22 +82,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      loading, 
-      login, 
-      logout, 
-      isAuthenticated: !!user 
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isAuthenticated: !!user,
+        isLoading,
+        login,
+        logout
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
-export function useAuth() {
+export const useAuth = () => {
   const context = useContext(AuthContext);
+  
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error('useAuth deve ser usado dentro de um AuthProvider');
   }
+  
   return context;
-} 
+}; 

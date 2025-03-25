@@ -62,6 +62,33 @@ npm run build
 
 Os arquivos serão gerados na pasta `dist`.
 
-## Deploy
+## Deploy no Netlify
 
-Este projeto está configurado para ser facilmente implantado no Netlify. Basta conectar seu repositório GitHub ao Netlify, e ele detectará automaticamente as configurações de build. 
+Para fazer o deploy da aplicação no Netlify, você pode seguir estes passos:
+
+1. Primeiro, faça login no [Netlify](https://app.netlify.com/) com sua conta.
+2. Clique em "Add new site" e selecione "Import an existing project".
+3. Conecte ao seu repositório GitHub e selecione o repositório do EventosFisio.
+4. Configure as seguintes opções de build:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+5. Clique em "Deploy site".
+
+Alternativamente, você pode usar o script de deploy incluído no projeto:
+
+```bash
+# Torne o script executável (apenas Linux/Mac)
+chmod +x deploy.sh
+
+# Execute o script de deploy
+./deploy.sh
+```
+
+No Windows, você pode executar:
+
+```bash
+npm run build
+npx netlify-cli deploy --prod
+```
+
+O Netlify irá automaticamente detectar o arquivo `netlify.toml` e aplicar as configurações de redirecionamento para o React Router funcionar corretamente. 
