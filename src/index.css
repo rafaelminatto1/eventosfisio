@@ -1,0 +1,682 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 245, 245, 245;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f4f6;
+  --border-color: #e5e7eb;
+  --input-bg: #ffffff;
+  --card-bg: #ffffff;
+  --header-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --accent-color: #3b82f6;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --task-card-bg: #ffffff;
+  --task-hover-bg: #f9fafb;
+  --task-drag-bg: #ffffff;
+  
+  /* Status Colors - Light Mode */
+  --red-100: #fee2e2;
+  --red-800: #991b1b;
+  --yellow-100: #fef3c7;
+  --yellow-800: #92400e;
+  --green-100: #d1fae5;
+  --green-800: #065f46;
+  --blue-100: #dbeafe;
+  --blue-800: #1e40af;
+  --purple-100: #ede9fe;
+  --purple-800: #5b21b6;
+  
+  /* Editor colors */
+  --editor-bg: #ffffff;
+  --editor-text: #111827;
+  --editor-toolbar-bg: #f3f4f6;
+  --editor-toolbar-border: #e5e7eb;
+}
+
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 30, 30, 30;
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --bg-primary: #1f2937;
+  --bg-secondary: #111827;
+  --border-color: #374151;
+  --input-bg: #374151;
+  --card-bg: #1f2937;
+  --header-bg: #111827;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --accent-color: #60a5fa;
+  --gray-100: #1f2937;
+  --gray-200: #374151;
+  --gray-300: #4b5563;
+  --gray-400: #6b7280;
+  --gray-500: #9ca3af;
+  --gray-600: #d1d5db;
+  --task-card-bg: #1f2937;
+  --task-hover-bg: #2d3748;
+  --task-drag-bg: #2d3748;
+  
+  /* Status Colors - Dark Mode - Ajustado para maior contraste */
+  --red-100: #4b1d1d;
+  --red-800: #fca5a5;
+  --yellow-100: #483c2b;
+  --yellow-800: #fcd34d;
+  --green-100: #1e3a31;
+  --green-800: #6ee7b7;
+  --blue-100: #1e3a8a;
+  --blue-800: #93c5fd;
+  --purple-100: #3b2e7e;
+  --purple-800: #c4b5fd;
+  
+  /* Editor colors - Dark Mode */
+  --editor-bg: #1f2937;
+  --editor-text: #f3f4f6;
+  --editor-toolbar-bg: #111827;
+  --editor-toolbar-border: #374151;
+}
+
+@layer base {
+  body {
+    @apply transition-colors duration-200;
+    color: var(--text-primary);
+    background-color: rgb(var(--background-rgb));
+  }
+
+  .bg-white {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  .bg-gray-50 {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  .bg-gray-100 {
+    background-color: var(--gray-100);
+    color: var(--text-primary);
+  }
+
+  .bg-gray-200 {
+    background-color: var(--gray-200);
+    color: var(--text-primary);
+  }
+  
+  /* Status background colors */
+  .bg-red-100 {
+    background-color: var(--red-100);
+  }
+  
+  .text-red-800 {
+    color: var(--red-800);
+  }
+  
+  .bg-yellow-100 {
+    background-color: var(--yellow-100);
+  }
+  
+  .text-yellow-800 {
+    color: var(--yellow-800);
+  }
+  
+  .bg-green-100 {
+    background-color: var(--green-100);
+  }
+  
+  .text-green-800 {
+    color: var(--green-800);
+  }
+  
+  .bg-blue-100 {
+    background-color: var(--blue-100);
+  }
+  
+  .text-blue-800 {
+    color: var(--blue-800);
+  }
+  
+  .bg-purple-100 {
+    background-color: var(--purple-100);
+  }
+  
+  .text-purple-800 {
+    color: var(--purple-800);
+  }
+
+  .shadow {
+    box-shadow: 0 1px 3px 0 var(--shadow-color), 0 1px 2px -1px var(--shadow-color);
+  }
+
+  .text-gray-400 {
+    color: var(--gray-400);
+  }
+
+  .text-gray-500 {
+    color: var(--text-secondary);
+  }
+
+  .text-gray-600 {
+    color: var(--text-secondary);
+  }
+
+  .text-gray-700 {
+    color: var(--text-primary);
+  }
+  
+  .text-gray-800 {
+    color: var(--text-primary);
+  }
+
+  .text-gray-900 {
+    color: var(--text-primary);
+  }
+
+  .border-gray-200 {
+    border-color: var(--border-color);
+  }
+
+  .border-gray-300 {
+    border-color: var(--border-color);
+  }
+  
+  /* Cartões de tarefas */
+  .task-card {
+    background-color: var(--task-card-bg);
+    color: var(--text-primary);
+  }
+
+  /* Inputs em modo escuro */
+  .dark input:not([type="checkbox"]):not([type="radio"]),
+  .dark select,
+  .dark textarea {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+  }
+
+  /* Corrigir cores de hover em modo escuro */
+  .dark .hover\:bg-gray-50:hover {
+    background-color: var(--gray-100);
+  }
+
+  .dark .hover\:bg-gray-100:hover {
+    background-color: var(--gray-200);
+  }
+
+  .dark .hover\:bg-gray-200:hover {
+    background-color: var(--gray-300);
+  }
+
+  .dark .hover\:text-gray-900:hover {
+    color: var(--text-primary);
+  }
+
+  /* Cartões coloridos e bordas */
+  .dark .border-t {
+    border-color: var(--border-color);
+  }
+
+  .dark .bg-white {
+    background-color: var(--bg-primary);
+  }
+  
+  .dark .hover\:bg-blue-50:hover {
+    background-color: var(--blue-100);
+  }
+  
+  .dark .hover\:bg-green-50:hover {
+    background-color: var(--green-100);
+  }
+
+  /* Componentes de arrasto e soltura */
+  .draggable-task {
+    background-color: var(--task-card-bg);
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  }
+  
+  .draggable-task:active {
+    cursor: grabbing;
+    transform: scale(1.02) rotate(1deg);
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+  }
+  
+  .dark .draggable-task:hover,
+  .dark .hover\:shadow-md:hover {
+    background-color: var(--task-hover-bg);
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+  }
+  
+  /* Estilos para o editor de texto rico */
+  .quill-editor-container {
+    margin-bottom: 1rem;
+  }
+  
+  .quill {
+    border-radius: 0.375rem;
+    overflow: hidden;
+  }
+  
+  .ql-toolbar.ql-snow {
+    background-color: var(--editor-toolbar-bg);
+    border-color: var(--editor-toolbar-border) !important;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+  }
+  
+  .ql-container.ql-snow {
+    border-color: var(--editor-toolbar-border) !important;
+    border-bottom-left-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+    background-color: var(--editor-bg);
+  }
+  
+  .dark .ql-toolbar.ql-snow .ql-stroke {
+    stroke: var(--gray-400) !important;
+  }
+  
+  .dark .ql-toolbar.ql-snow .ql-fill {
+    fill: var(--gray-400) !important;
+  }
+  
+  .dark .ql-toolbar.ql-snow .ql-picker {
+    color: var(--gray-400) !important;
+  }
+  
+  .dark .ql-editor {
+    color: var(--editor-text);
+  }
+  
+  .dark .ql-editor.ql-blank::before {
+    color: var(--gray-500);
+  }
+  
+  /* Indicação visual para arrastar e soltar */
+  .column-droppable-active {
+    background-color: rgba(59, 130, 246, 0.1);
+    border: 2px dashed #60a5fa;
+    border-radius: 0.5rem;
+  }
+  
+  /* Estilo para coluna quando item está sendo arrastado sobre ela */
+  .column-drag-over {
+    background-color: rgba(59, 130, 246, 0.15);
+    border: 2px dashed #3b82f6;
+  }
+  
+  /* Animações */
+  @keyframes bounce-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(20px);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05) translateY(-5px);
+    }
+    70% {
+      transform: scale(0.95) translateY(3px);
+    }
+    100% {
+      transform: scale(1) translateY(0);
+    }
+  }
+  
+  .animate-bounce-in {
+    animation: bounce-in 0.5s ease-out forwards;
+  }
+}
+
+/* Adicionar transição suave para mudança de tema */
+body, div, input, select, textarea, button, span, h1, h2, h3, h4, h5, h6, p {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Adicionar animações para as páginas */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Transições suaves */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Melhora no contraste para inputs */
+input:focus, select:focus, textarea:focus {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  border-color: #2563eb;
+}
+
+/* Estilos para a coluna quando uma tarefa está sendo arrastada por cima */
+.column-drag-over {
+  background-color: #f0f9ff !important; /* Azul claro */
+  border: 2px dashed #3b82f6 !important;
+}
+
+/* Animação para notificações */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.5s ease-out forwards;
+}
+
+/* Estilos para cartões de tarefas */
+.task-card {
+  transition: all 0.2s ease-in-out;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Estilos para os cartões de eventos */
+.event-card {
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.event-card.status-planejamento {
+  border-left-color: #60a5fa; /* Azul */
+}
+
+.event-card.status-confirmado {
+  border-left-color: #34d399; /* Verde */
+}
+
+.event-card.status-emAndamento {
+  border-left-color: #fbbf24; /* Amarelo */
+}
+
+.event-card.status-concluido {
+  border-left-color: #10b981; /* Verde escuro */
+}
+
+.event-card.status-cancelado {
+  border-left-color: #ef4444; /* Vermelho */
+}
+
+.event-card.status-inativo {
+  border-left-color: #9ca3af; /* Cinza */
+}
+
+/* Estilos para botões interativos */
+.btn-primary {
+  @apply px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200 transition-colors;
+}
+
+.btn-success {
+  @apply px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors;
+}
+
+.btn-danger {
+  @apply px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors;
+}
+
+.btn-warning {
+  @apply px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors;
+}
+
+/* Melhorias no editor de rich text */
+.quill-editor-container .ql-container {
+  border-bottom-left-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+  background-color: white;
+}
+
+.quill-editor-container .ql-toolbar {
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.quill-editor-container .ql-editor {
+  min-height: 120px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Estilos para cards de dashboard */
+.dashboard-card {
+  @apply bg-white rounded-lg shadow-md p-6 transition-all hover:shadow-lg;
+}
+
+.dashboard-card-header {
+  @apply flex justify-between items-center mb-4;
+}
+
+.dashboard-card-title {
+  @apply text-xl font-semibold text-gray-800;
+}
+
+.dashboard-card-body {
+  @apply text-gray-600;
+}
+
+.dashboard-card-footer {
+  @apply mt-4 pt-4 border-t border-gray-100 flex justify-between items-center;
+}
+
+/* Estilos para paginação */
+.pagination-container {
+  @apply flex justify-center mt-6;
+}
+
+.pagination-item {
+  @apply px-3 py-1 mx-1 rounded-md border text-sm text-gray-600 hover:bg-gray-50 transition-colors;
+}
+
+.pagination-item.active {
+  @apply bg-blue-600 text-white border-blue-600 hover:bg-blue-700;
+}
+
+/* Placeholder personalizado */
+.custom-placeholder::placeholder {
+  color: #9ca3af;
+  opacity: 0.8;
+}
+
+/* Tooltips personalizados */
+.tooltip {
+  @apply relative inline-block;
+}
+
+.tooltip .tooltip-text {
+  @apply invisible absolute z-10 p-2 text-xs text-white bg-gray-900 rounded-md opacity-0 transition-opacity duration-300 w-max;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltip-text {
+  @apply visible opacity-100;
+}
+
+/* Adaptações para dispositivos móveis */
+@media (max-width: 768px) {
+  .task-columns-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .task-column {
+    scroll-snap-align: start;
+    min-width: 85vw; /* Ocupar quase toda a largura da tela em dispositivos móveis */
+    margin-right: 1rem;
+  }
+  
+  /* Esconder a última coluna parcialmente para indicar que há mais conteúdo */
+  .task-column:last-child {
+    min-width: 85vw;
+    padding-right: 1rem;
+  }
+  
+  /* Ajustes para mostrar melhor os cards em telas menores */
+  .task-card {
+    touch-action: pan-y; /* Permitir scrolling vertical, mas capturar os gestos horizontais */
+  }
+  
+  /* Melhorar tamanho de toque para botões em dispositivos móveis */
+  .task-card button,
+  .column-header button {
+    min-height: 36px;
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Dica de arrastar - só mostrar em telas de toque */
+.touch-hint {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .touch-hint {
+    display: block;
+    animation: fadeInOut 3s ease-in-out infinite;
+  }
+}
+
+/* Animação para a dica de touch */
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.7; }
+}
+
+/* Indicadores visuais para o swipe */
+.swipe-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1;
+}
+
+.swipe-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(59, 130, 246, 0.3), transparent);
+}
+
+.swipe-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(59, 130, 246, 0.3), transparent);
+}
+
+.is-swiping .swipe-overlay {
+  opacity: 1;
+  width: 40px;
+}
+
+/* Aprimorar estilos para os navegadores iOS (iPhone) */
+@supports (-webkit-touch-callout: none) {
+  /* Estilos específicos para iOS */
+  .task-card {
+    /* Corrigir o "rubber band" effect */
+    overscroll-behavior: none;
+    /* Melhorar feedback visual ao tocar */
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Ajustar tamanho de fontes para iOS */
+  .task-card h4 {
+    font-size: 15px;
+  }
+  
+  .task-card .text-xs {
+    font-size: 12px;
+  }
+  
+  /* Deixar os botões mais fáceis de tocar */
+  .task-card button {
+    padding: 8px;
+    margin: -4px; /* Expandir área de toque sem modificar layout */
+  }
+  
+  /* Melhorar o feedback tátil */
+  .task-card:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Aprimorar responsividade para a interface geral */
+@media (max-width: 640px) {
+  .main-content {
+    padding: 0.5rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .fixed-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+  }
+  
+  /* Tornar os filtros mais acessíveis em dispositivos móveis */
+  .filters-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .filter-button {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+} 
