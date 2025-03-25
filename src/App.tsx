@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth, AuthProvider } from './app/contexts/AuthContext';
 import { ThemeProvider } from './app/contexts/ThemeContext';
 import { LoginPage } from './app/pages/LoginPage';

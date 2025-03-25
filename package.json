@@ -4,17 +4,10 @@
   "description": "Sistema para gerenciamento de eventos de fisioterapia",
   "main": "index.js",
   "type": "module",
-  "homepage": "https://rafaelminatto1.github.io/eventosfisio",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rafaelminatto1/eventosfisio.git"
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
