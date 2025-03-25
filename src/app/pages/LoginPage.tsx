@@ -22,13 +22,10 @@ export function LoginPage() {
       setIsLoading(true);
       setError('');
       
-      const success = await login(email, password);
-      
-      if (!success) {
-        setError('Email ou senha incorretos');
-      }
+      await login(email, password);
+      // Login bem-sucedido se não lançar erro
     } catch (err) {
-      setError('Ocorreu um erro ao fazer login. Tente novamente.');
+      setError('Email ou senha incorretos');
       console.error(err);
     } finally {
       setIsLoading(false);
